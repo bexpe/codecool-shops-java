@@ -18,14 +18,13 @@ public class BaseModel {
         this.description = description;
     }
 
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
+    } // should be private
 
     public String getName() {
         return name;
@@ -60,5 +59,4 @@ public class BaseModel {
         }
         return sb.toString();
     }
-
 }
