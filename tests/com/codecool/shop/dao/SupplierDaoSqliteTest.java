@@ -16,12 +16,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SupplierDaoSqliteTest {
+    @Spy
+    List<Supplier> spiedSuppliers = new ArrayList<>();
     @Mock
     private SQLiteJDBCConnector connector;
     @Mock
     private SupplierDao supplierDao;
-    @Spy
-    List<Supplier> spiedSuppliers =  new ArrayList<>();
 
     @BeforeEach
     void setUp() throws SQLException {
@@ -47,7 +47,7 @@ class SupplierDaoSqliteTest {
     }
 
     @Test
-    void testFindAllSuppliers() {
+    void testGetAllSuppliersListSize() {
         Mockito.doReturn(8).when(spiedSuppliers).size();
         assertEquals(spiedSuppliers.size(), supplierDao.getAll().size());
     }
