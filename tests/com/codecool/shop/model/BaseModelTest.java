@@ -20,6 +20,13 @@ class BaseModelTest {
 	}
 
 	@Test
+	@DisplayName("Tests whether calling setId with id LT 0 throws a IllegalArgumentException")
+	public void testSetIdLT0() {
+		BaseModel testObject = new BaseModel("piwo", "z pianka");
+		assertThrows(IllegalArgumentException.class, ()-> testObject.setId(-1));
+	}
+
+	@Test
 	@DisplayName("Sets valid id and returns valid id of a Product")
 	public void testSetAndGetValidName()
 	{
@@ -37,7 +44,7 @@ class BaseModelTest {
 	}
 
 	@Test
-	@DisplayName("Returns valid string descripting a product")
+	@DisplayName("Returns valid string descripting a BaseModel")
 	void testToStringOfBaseModel () {
 		BaseModel testObject = new BaseModel("piwo", "z pianka");
 		testObject.toString();
