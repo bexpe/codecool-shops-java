@@ -29,4 +29,9 @@ class ProductTest {
 	void testGetDefaultPrice() {
 		assertEquals(11.1f, product.getDefaultPrice());
 	}
+
+	@Test
+	void testGetDefaultCurrency() {
+		assertEquals("CUR", product.getDefaultCurrency());
+	}
 }
