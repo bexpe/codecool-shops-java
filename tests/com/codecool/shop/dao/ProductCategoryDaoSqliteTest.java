@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,6 +35,19 @@ class ProductCategoryDaoSqliteTest {
     @Test
     void testFindCategoryById() {
         ProductCategory category = new ProductCategory(1, "chemia", "niemieckie środki czystości i nie tylko", "Berlin");
-        assertEquals(category, productCategoryDao.find(-1));
+        assertEquals(category.getDepartment(), productCategoryDao.find(1).getDepartment());
+    }
+
+    @Test
+    void testFindAllCategories() {
+        List<ProductCategory> categories = productCategoryDao.getAll();
+        assertEquals(
+                Arrays.asList(
+                    new ProductCategory(1,"chemia", "niemieckie środki czystości i nie tylko", "Berlin"),
+                    new ProductCategory(2,"spożywcze", "tylko świeże warzywa i owoce", "Hala Targowa"),
+                    new ProductCategory(3,"narzędzia", "narzędzia sprawne jak szwajcarskie zegarki", "neutralna Szwajcaria"),
+                    new ProductCategory(4,"słodycze", "wszystko to co misie lubią najbardziej", "Dom Kubusia Puchatka")
+                ).get(2).getDepartment(),
+                categories.get(2).getDepartment());
     }
 }
