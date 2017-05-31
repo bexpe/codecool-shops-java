@@ -58,4 +58,9 @@ class ProductTest {
 					supplier);
 		});
 	}
+
+	@Test
+	void testGetSupplier() {
+		assertEquals(supplier, product.getSupplier());
+	}
 }
