@@ -63,4 +63,11 @@ class ProductTest {
 	void testGetSupplier() {
 		assertEquals(supplier, product.getSupplier());
 	}
+
+	@Test
+	void testSetSupplier() {
+		Supplier setNewSupplier = mock(Supplier.class);
+		product.setSupplier(setNewSupplier);
+		assertEquals(setNewSupplier, product.getSupplier());
+	}
 }
