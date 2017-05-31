@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class SupplierDaoSqliteTest {
     @Spy
@@ -50,5 +52,18 @@ class SupplierDaoSqliteTest {
     void testGetAllSuppliersListSize() {
         Mockito.doReturn(8).when(spiedSuppliers).size();
         assertEquals(spiedSuppliers.size(), supplierDao.getAll().size());
+    }
+
+    @Test
+    void testGetSupplierFromAllSuppliersList() {
+        Supplier supplier = mock(Supplier.class);
+        List<Supplier> spiedSuppliers = Mockito.spy(new ArrayList<>());
+        spiedSuppliers.add(supplier);
+        Mockito.verify(spiedSuppliers).add(supplier);
+        Mockito.doReturn(supplier).when(spiedSuppliers).get(6);
+        when(spiedSuppliers.get(6).getDescription()).thenReturn("Twój czas należy do nas");
+        assertEquals(spiedSuppliers.get(6).getDescription(),
+                supplierDao.getAll().get(6).getDescription()
+        );
     }
 }
