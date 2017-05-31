@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 class SupplierDaoSqliteTest {
     @Spy
-    List<Supplier> spiedSuppliers = new ArrayList<>();
+    private List<Supplier> spiedSuppliers = new ArrayList<>();
     @Mock
     private SQLiteJDBCConnector connector;
     @Mock
