@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ProductTest {
 	private Product product;
@@ -69,5 +70,18 @@ class ProductTest {
 		Supplier setNewSupplier = mock(Supplier.class);
 		product.setSupplier(setNewSupplier);
 		assertEquals(setNewSupplier, product.getSupplier());
+	}
+
+	@Test
+	void testToString() {
+		when(productCategory.getName()).thenReturn("mock category");
+		when(supplier.getName()).thenReturn("mock supplier");
+		assertEquals("id: 1, " +
+						"name: name, " +
+						"defaultPrice: 11.1, " +
+						"defaultCurrency: CUR, " +
+						"productCategory: mock category, " +
+						"supplier: mock supplier",
+				product.toString());
 	}
 }
