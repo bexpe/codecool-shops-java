@@ -39,4 +39,9 @@ class ProductTest {
 	void testGetPrice() {
 		assertEquals("11.1" + " " + "CUR", product.getPrice());
 	}
+
+	@Test
+	void testGetProductCategory() {
+		assertEquals(productCategory, product.getProductCategory());
+	}
 }
