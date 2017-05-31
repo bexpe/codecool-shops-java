@@ -34,4 +34,9 @@ class ProductTest {
 	void testGetDefaultCurrency() {
 		assertEquals("CUR", product.getDefaultCurrency());
 	}
+
+	@Test
+	void testGetPrice() {
+		assertEquals("11.1" + " " + "CUR", product.getPrice());
+	}
 }
