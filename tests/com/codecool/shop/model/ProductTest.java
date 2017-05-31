@@ -44,4 +44,18 @@ class ProductTest {
 	void testGetProductCategory() {
 		assertEquals(productCategory, product.getProductCategory());
 	}
+
+	@Test
+	void testGetProductCategoryWithNegativePrice () {
+		assertThrows(IllegalArgumentException.class, ()->{
+			product = new Product(
+					1,
+					"name",
+					-11.1f,
+					"CUR",
+					"description",
+					productCategory,
+					supplier);
+		});
+	}
 }
