@@ -51,7 +51,7 @@ class ProductCategoryDaoSqliteTest {
     }
 
     @Test
-    void testFindAllCategories() {
+    void testGetCategoryFromAllCategoriesList() {
         ProductCategory productCategory = mock(ProductCategory.class);
         List<ProductCategory> spiedCategories = Mockito.spy(new ArrayList<>());
 
