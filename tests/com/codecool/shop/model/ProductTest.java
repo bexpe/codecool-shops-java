@@ -1,6 +1,9 @@
 package com.codecool.shop.model;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 class ProductTest {
@@ -20,5 +23,10 @@ class ProductTest {
 				"description",
 				productCategory,
 				supplier);
+	}
+
+	@Test
+	void testGetDefaultPrice() {
+		assertEquals(11.1f, product.getDefaultPrice());
 	}
 }
