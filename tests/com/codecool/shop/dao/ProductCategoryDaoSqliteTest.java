@@ -51,6 +51,12 @@ class ProductCategoryDaoSqliteTest {
     }
 
     @Test
+    void testGetAllCategoriesListSize() {
+        Mockito.doReturn(4).when(spiedCategories).size();
+        assertEquals(spiedCategories.size(), productCategoryDao.getAll().size());
+    }
+
+    @Test
     void testGetCategoryFromAllCategoriesList() {
         ProductCategory productCategory = mock(ProductCategory.class);
         List<ProductCategory> spiedCategories = Mockito.spy(new ArrayList<>());
