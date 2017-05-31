@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ProductCategoryDaoSqliteTest {
 
     @Spy
-    private List<ProductCategory> spiedCategories;
+    private List<ProductCategory> spiedCategories = new ArrayList<>();
     @Mock
     private ProductCategoryDao productCategoryDao;
     @Mock
