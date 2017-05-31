@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ProductCategoryDaoSqliteTest {
 
@@ -43,7 +45,8 @@ class ProductCategoryDaoSqliteTest {
 
     @Test
     void testFindCategoryById() {
-        ProductCategory category = new ProductCategory(1, "chemia", "niemieckie środki czystości i nie tylko", "Berlin");
+        ProductCategory category = mock(ProductCategory.class);
+        when(category.getDepartment()).thenReturn("Berlin");
         assertEquals(category.getDepartment(), productCategoryDao.find(1).getDepartment());
     }
 
