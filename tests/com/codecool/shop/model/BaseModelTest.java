@@ -11,23 +11,15 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class BaseModelTest {
 	@Test
-	@DisplayName("Sets valid id and returns valid id of a Product")
-	public void testSetAndGetValidId()
+	@DisplayName("Gets valid id of a Product")
+	public void testGetValidId()
 	{
 		BaseModel testObject = new BaseModel("piwo", "z pianka");
-		testObject.setId(1);
-		assertEquals(1, testObject.getId());
+		assertEquals(0, testObject.getId());
 	}
 
 	@Test
-	@DisplayName("Tests whether calling setId with id LT 0 throws a IllegalArgumentException")
-	public void testSetIdLT0() {
-		BaseModel testObject = new BaseModel("piwo", "z pianka");
-		assertThrows(IllegalArgumentException.class, ()-> testObject.setId(-1));
-	}
-
-	@Test
-	@DisplayName("Sets valid id and returns valid id of a Product")
+	@DisplayName("Sets and returns valid name of a Product")
 	public void testSetAndGetValidName()
 	{
 		BaseModel testObject = new BaseModel("piwo", "z pianka");
@@ -36,7 +28,7 @@ class BaseModelTest {
 	}
 
 	@Test
-	@DisplayName("Sets valid description of a Product")
+	@DisplayName("Sets and returns valid description of a Product")
 	void testSetAndGetValidDescription() {
 		BaseModel testObject = new BaseModel("piwo", "z pianka");
 		testObject.setDescription("z pianka");
@@ -44,7 +36,7 @@ class BaseModelTest {
 	}
 
 	@Test
-	@DisplayName("Returns valid string descripting a BaseModel")
+	@DisplayName("Returns valid string description of a BaseModel")
 	void testToStringOfBaseModel () {
 		BaseModel testObject = new BaseModel("piwo", "z pianka");
 		testObject.toString();
