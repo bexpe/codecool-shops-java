@@ -46,8 +46,10 @@ class ProductCategoryDaoSqliteTest {
     @Test
     void testFindCategoryById() {
         ProductCategory category = mock(ProductCategory.class);
-        when(category.getDepartment()).thenReturn("Berlin");
-        assertEquals(category.getDepartment(), productCategoryDao.find(1).getDepartment());
+        when(category.toString()).thenReturn(
+                "id: 1,name: chemia, department: Berlin, " +
+                        "description: niemieckie środki czystości i nie tylko");
+        assertEquals(category.toString(), productCategoryDao.find(1).toString());
     }
 
     @Test
@@ -65,11 +67,13 @@ class ProductCategoryDaoSqliteTest {
         Mockito.verify(spiedCategories).add(productCategory);
 
         Mockito.doReturn(productCategory).when(spiedCategories).get(2);
-        when(spiedCategories.get(2).getDepartment()).thenReturn("neutralna Szwajcaria");
+        when(spiedCategories.get(2).toString()).thenReturn(
+                "id: 3,name: narzędzia, department: neutralna Szwajcaria, " +
+                        "description: narzędzia sprawne jak szwajcarskie zegarki");
 
         assertEquals(
-                spiedCategories.get(2).getDepartment(),
-                productCategoryDao.getAll().get(2).getDepartment()
+                spiedCategories.get(2).toString(),
+                productCategoryDao.getAll().get(2).toString()
         );
     }
 }
