@@ -41,6 +41,23 @@ class ProductDaoSqliteTest extends BaseTest {
     }
 
     @Test
+    void testAddProductToDB() {
+        Supplier supplier = mock(Supplier.class);
+        when(supplier.getId()).thenReturn(1);
+        ProductCategory category = mock(ProductCategory.class);
+        when(category.getId()).thenReturn(1);
+        Product product = new Product(
+                "TEST PRODUCT",
+                1234f,
+                "PLN",
+                "TEST DESCRIPTION",
+                category,
+                supplier
+        );
+        assertEquals(1, (int) productDao.add(product));
+    }
+
+    @Test
     void testFindProductById() {
         Product product = mock(Product.class);
         when(product.getDescription()).thenReturn("DESCRIPTION 2");
