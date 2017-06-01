@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by beata on 29.05.17.
@@ -54,7 +55,12 @@ class BasketItemTest {
 	@DisplayName("Returns valid quantity integer")
 	void testSetQuantityInteger() {
 		basketItem.setQuantity(15);
-		assertEquals(11, (int) basketItem.getQuantity());
+		assertEquals(15, (int) basketItem.getQuantity());
 	}
 
+	@Test
+	void testGetValue() {
+		when (product.getDefaultPrice()).thenReturn(100f);
+		assertEquals(1100f, basketItem.getValue());// because quantity is 11
+	}
 }
