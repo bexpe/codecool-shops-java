@@ -10,9 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by beata on 29.05.17.
- */
 class BasketTest {
     private Basket basket;
     private BasketItem basketItem;
@@ -30,11 +27,9 @@ class BasketTest {
     void testAddGetItemsToBasketList() {
         when(product.getId()).thenReturn(1);
         basket.add(product,3);
-
         Product product1 = mock(Product.class);
         when(product.getId()).thenReturn(2);
         basket.add(product1,1);
-
         assertEquals(2, basket.getItems().size() );
     }
 
@@ -43,7 +38,6 @@ class BasketTest {
         basket.add(product,3);
         Product product1 = mock(Product.class);
         basket.add(product1,1);
-
         assertEquals(1, basket.getItems().size() );
         assertEquals(4, basket.getItems().get(0).getQuantity().intValue());
     }
@@ -60,7 +54,6 @@ class BasketTest {
     void testGetTotalCount() {
         when(product.getId()).thenReturn(1);
         basket.add(product,3);
-
         Product product1 = mock(Product.class);
         when(product1.getId()).thenReturn(2);
         basket.add(product1,1);
@@ -72,14 +65,12 @@ class BasketTest {
         basket.getItems().add(basketItem);
         basket.getItems().add(basketItem);
         when(basketItem.getValue()).thenReturn(2f);
-
         assertEquals(4.0f, basket.getTotalValue());
     }
 
     @Test
     void testGetTotalValueWithNoItems() {
         when(basketItem.getValue()).thenReturn(2f);
-
         assertEquals(0.0f, basket.getTotalValue());
     }
 
