@@ -66,4 +66,13 @@ class BasketTest {
         basket.add(product1,1);
         assertEquals(4, basket.getTotalCount().intValue());
     }
+
+    @Test
+    void testGetTotalValue() {
+        basket.getItems().add(basketItem);
+        basket.getItems().add(basketItem);
+        when(basketItem.getValue()).thenReturn(2f);
+
+        assertEquals(4.0f, basket.getTotalValue());
+    }
 }
