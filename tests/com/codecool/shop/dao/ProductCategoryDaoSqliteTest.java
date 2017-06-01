@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 class ProductCategoryDaoSqliteTest extends BaseTest {
@@ -42,6 +43,10 @@ class ProductCategoryDaoSqliteTest extends BaseTest {
                         "department: DEPARTMENT 1, " +
                         "description: DESCRIPTION 1");
         assertEquals(category.toString(), productCategoryDao.find(1).toString());
+    }
+
+    @Test void testFindCategoryWithWrongId() {
+        assertNull(productCategoryDao.find(0));
     }
 
     @Test
