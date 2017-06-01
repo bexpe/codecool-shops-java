@@ -1,23 +1,22 @@
 package com.codecool.shop.model;
 
-import static org.mockito.Mockito.*;
-
-import com.codecool.shop.model.BaseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Created by beata on 29.05.17.
- */
 class BaseModelTest {
+    private BaseModel testObject;
 
 	@Test
 	@DisplayName("Gets valid id of a Product")
 	void testGetValidId() {
-		BaseModel testObject = new BaseModel("piwo", "z pianka");
-		assertEquals(0, testObject.getId());
+        testObject = new BaseModel("piwo");
+        assertEquals(0, testObject.getId());
+        testObject = new BaseModel("piwo", "z pianka");
+        assertEquals(0, testObject.getId());
+		testObject = new BaseModel(2,"piwo", "z pianka");
+		assertEquals(2, testObject.getId());
 	}
 
 	@Test
