@@ -30,7 +30,7 @@ class ProductCategoryDaoSqliteTest {
     void setUp() throws SQLException {
         MockitoAnnotations.initMocks(this);
         connector = new SQLiteJDBCConnector();
-        connector.setDatabaseFilePath("jdbc:sqlite:src/main/resources/test_database.db");
+        connector.setDatabaseFilePath("jdbc:sqlite:tests/resources/test_database.db");
         connector.connectToDb();
         connector.dropTables();
         connector.createTables();
