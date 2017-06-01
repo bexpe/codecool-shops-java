@@ -77,6 +77,13 @@ class BasketTest {
     }
 
     @Test
+    void testGetTotalValueWithNoItems() {
+        when(basketItem.getValue()).thenReturn(2f);
+
+        assertEquals(0.0f, basket.getTotalValue());
+    }
+
+    @Test
     void getCurrency() {
         assertEquals("PLN", basket.getCurrency());
     }
