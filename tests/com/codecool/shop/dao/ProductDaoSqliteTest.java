@@ -5,15 +5,19 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Spy;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ProductDaoSqliteTest extends BaseTest {
 
+    @Spy
+    private List<Product> spiedProducts = new ArrayList<>();
     @Mock
     private ProductDao productDao;
     @Mock
@@ -42,5 +46,11 @@ class ProductDaoSqliteTest extends BaseTest {
                 product.getDescription(),
                 productDao.find(2).getDescription()
         );
+    }
+
+    @Test
+    void testGetAllProductListSize() {
+        doReturn(4).when(spiedProducts).size();
+        assertEquals(spiedProducts.size(), productDao.getAll().size());
     }
 }
