@@ -8,9 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by beata on 29.05.17.
- */
 class BasketItemTest {
 	private Product product;
 	private ProductCategory productCategory;
