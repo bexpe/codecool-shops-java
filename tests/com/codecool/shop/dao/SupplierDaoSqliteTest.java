@@ -46,13 +46,13 @@ class SupplierDaoSqliteTest {
 
     @Test
     void testFindSupplierById() {
-        Supplier supplier = new Supplier(1, "Ariel", "Najczerwieńsza jakość");
+        Supplier supplier = new Supplier(1, "SUPPLIER 1", "DESCRIPTION SUPPLIER 1");
         assertEquals(supplier.getDescription(), supplierDao.find(1).getDescription());
     }
 
     @Test
     void testGetAllSuppliersListSize() {
-        doReturn(8).when(spiedSuppliers).size();
+        doReturn(2).when(spiedSuppliers).size();
         assertEquals(spiedSuppliers.size(), supplierDao.getAll().size());
     }
 
@@ -64,11 +64,11 @@ class SupplierDaoSqliteTest {
         spiedSuppliers.add(supplier);
         verify(spiedSuppliers).add(supplier);
 
-        doReturn(supplier).when(spiedSuppliers).get(6);
-        when(spiedSuppliers.get(6).getDescription()).thenReturn("Twój czas należy do nas");
+        doReturn(supplier).when(spiedSuppliers).get(1);
+        when(spiedSuppliers.get(1).getDescription()).thenReturn("DESCRIPTION SUPPLIER 2");
 
-        assertEquals(spiedSuppliers.get(6).getDescription(),
-                supplierDao.getAll().get(6).getDescription()
+        assertEquals(spiedSuppliers.get(1).getDescription(),
+                supplierDao.getAll().get(1).getDescription()
         );
     }
 }
