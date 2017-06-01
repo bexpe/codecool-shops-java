@@ -3,13 +3,17 @@ package com.codecool.shop.dao;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-class ProductDaoSqliteTest {
+import java.sql.SQLException;
+
+class ProductDaoSqliteTest extends BaseTest {
     @BeforeEach
-    void setUp() {
+    void setUp() throws SQLException {
+        super.setUpDB();
     }
 
     @AfterEach
-    void tearDown() {
+    void tearDown() throws SQLException {
+        super.closeDB();
     }
 
 }
