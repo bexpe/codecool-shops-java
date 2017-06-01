@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class ProductCategoryDaoSqliteTest extends BaseTest{
+class ProductCategoryDaoSqliteTest extends BaseTest {
 
     @Spy
     private List<ProductCategory> spiedCategories = new ArrayList<>();
@@ -37,7 +37,10 @@ class ProductCategoryDaoSqliteTest extends BaseTest{
     void testFindCategoryById() {
         ProductCategory category = mock(ProductCategory.class);
         when(category.toString()).thenReturn(
-                "id: 1,name: TEST CATEGORY 1, department: DEPARTMENT 1, description: DESCRIPTION 1");
+                "id: 1," +
+                        "name: TEST CATEGORY 1, " +
+                        "department: DEPARTMENT 1, " +
+                        "description: DESCRIPTION 1");
         assertEquals(category.toString(), productCategoryDao.find(1).toString());
     }
 
@@ -57,7 +60,10 @@ class ProductCategoryDaoSqliteTest extends BaseTest{
 
         doReturn(productCategory).when(spiedCategories).get(1);
         when(spiedCategories.get(1).toString()).thenReturn(
-                "id: 2,name: TEST CATEGORY 2, department: DEPARTMENT 2, description: DESCRIPTION 2");
+                "id: 2," +
+                        "name: TEST CATEGORY 2, " +
+                        "department: DEPARTMENT 2, " +
+                        "description: DESCRIPTION 2");
 
         assertEquals(
                 spiedCategories.get(1).toString(),

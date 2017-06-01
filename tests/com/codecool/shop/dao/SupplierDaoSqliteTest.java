@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class SupplierDaoSqliteTest extends BaseTest{
+class SupplierDaoSqliteTest extends BaseTest {
 
     @Spy
     private List<Supplier> spiedSuppliers = new ArrayList<>();
@@ -35,7 +35,10 @@ class SupplierDaoSqliteTest extends BaseTest{
 
     @Test
     void testFindSupplierById() {
-        Supplier supplier = new Supplier(1, "SUPPLIER 1", "DESCRIPTION SUPPLIER 1");
+        Supplier supplier = new Supplier(
+                1,
+                "SUPPLIER 1",
+                "DESCRIPTION SUPPLIER 1");
         assertEquals(supplier.getDescription(), supplierDao.find(1).getDescription());
     }
 

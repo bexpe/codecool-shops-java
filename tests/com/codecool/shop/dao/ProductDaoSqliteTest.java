@@ -41,6 +41,23 @@ class ProductDaoSqliteTest extends BaseTest {
     }
 
     @Test
+    void testAddProductToDB() {
+        Supplier supplier = mock(Supplier.class);
+        when(supplier.getId()).thenReturn(1);
+        ProductCategory category = mock(ProductCategory.class);
+        when(category.getId()).thenReturn(1);
+        Product product = new Product(
+                "TEST PRODUCT",
+                1234f,
+                "PLN",
+                "TEST DESCRIPTION",
+                category,
+                supplier
+        );
+        assertEquals(1, (int) productDao.add(product));
+    }
+
+    @Test
     void testFindProductById() {
         Product product = mock(Product.class);
         when(product.getDescription()).thenReturn("DESCRIPTION 2");
@@ -64,8 +81,13 @@ class ProductDaoSqliteTest extends BaseTest {
         verify(spiedProducts).add(product);
         doReturn(product).when(spiedProducts).get(3);
         when(spiedProducts.get(3).toString()).thenReturn(
-                "id: 4, name: PRODUCT 4, defaultPrice: 104.000000, defaultCurrency: PLN, " +
-                        "productCategory: TEST CATEGORY 1, supplier: SUPPLIER 1");
+                "id: 4, " +
+                        "name: PRODUCT 4, " +
+                        "defaultPrice: 104.000000, " +
+                        "defaultCurrency: PLN, " +
+                        "productCategory: TEST CATEGORY 1, " +
+                        "supplier: SUPPLIER 1"
+        );
         assertEquals(spiedProducts.get(3).toString(), productDao.getAll().get(3).toString());
     }
 
