@@ -2,14 +2,17 @@ package com.codecool.shop.dao;
 
 import com.codecool.shop.model.Supplier;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierDaoSqlite extends BaseDao implements SupplierDao {
+    public SupplierDaoSqlite() {
+    }
+
+    public SupplierDaoSqlite(Connection connection) {
+        super(connection);
+    }
 
     @Override
     public Supplier find(int id) {
@@ -22,10 +25,10 @@ public class SupplierDaoSqlite extends BaseDao implements SupplierDao {
 
             if (rs.next()) {
                 supplier = new Supplier(
+                        rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description")
                 );
-                supplier.setId(rs.getInt("id"));
             }
         } catch (SQLException e) {
             System.out.println("Connect to DB failed");
@@ -43,10 +46,10 @@ public class SupplierDaoSqlite extends BaseDao implements SupplierDao {
             ResultSet rs = statement.executeQuery("SELECT * FROM suppliers");
             while (rs.next()) {
                 Supplier supplier = new Supplier(
+                        rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description")
                 );
-                supplier.setId(rs.getInt("id"));
                 suppliers.add(supplier);
             }
         } catch (SQLException e) {

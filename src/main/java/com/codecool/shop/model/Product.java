@@ -17,38 +17,40 @@ public class Product extends BaseModel {
         this.setProductCategory(productCategory);
     }
 
-    public float getDefaultPrice() {
-        return Math.round(defaultPrice * 100.0) / 100.0F;
+    public Product(int id, String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
+        super(id, name, description);
+        this.setPrice(defaultPrice, currencyString);
+        this.setSupplier(supplier);
+        this.setProductCategory(productCategory);
     }
 
-    public void setDefaultPrice(float defaultPrice) {
-        this.defaultPrice = defaultPrice;
+    public float getDefaultPrice() {
+        return Math.round(defaultPrice * 100.0) / 100.0F;
     }
 
     public Currency getDefaultCurrency() {
         return defaultCurrency;
     }
 
-    public void setDefaultCurrency(Currency defaultCurrency) {
-        this.defaultCurrency = defaultCurrency;
-    }
-
     public String getPrice() {
         return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
     }
 
-    public void setPrice(float price, String currency) {
-        this.defaultPrice = price;
-        this.defaultCurrency = Currency.getInstance("PLN");
+    private void setPrice(float price, String currency) {
+        if (price > 0) {
+            this.defaultPrice = price;
+            this.defaultCurrency = Currency.getInstance("PLN");
+        } else {
+            throw new IllegalArgumentException("Price can't be lower than zero");
+        }
     }
 
     public ProductCategory getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
+    private void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
     }
 
     public Supplier getSupplier() {
@@ -57,7 +59,6 @@ public class Product extends BaseModel {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
-        this.supplier.addProduct(this);
     }
 
     @Override
