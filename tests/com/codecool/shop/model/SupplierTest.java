@@ -1,5 +1,6 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.model.Supplier;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
