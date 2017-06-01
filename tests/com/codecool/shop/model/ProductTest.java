@@ -1,8 +1,5 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +25,6 @@ class ProductTest {
 				"description",
 				productCategory,
 				supplier);
-
 		productWithNoId = new Product(
 				"name",
 				11.1f,
@@ -96,7 +92,6 @@ class ProductTest {
 						"productCategory: mock category, " +
 						"supplier: mock supplier",
 				product.toString());
-
 		assertEquals(
 				"id: 0, " +
 				"name: name, " +

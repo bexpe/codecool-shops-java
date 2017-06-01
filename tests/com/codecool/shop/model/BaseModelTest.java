@@ -12,18 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
  * Created by beata on 29.05.17.
  */
 class BaseModelTest {
+
 	@Test
 	@DisplayName("Gets valid id of a Product")
-	public void testGetValidId()
-	{
+	void testGetValidId() {
 		BaseModel testObject = new BaseModel("piwo", "z pianka");
 		assertEquals(0, testObject.getId());
 	}
 
 	@Test
 	@DisplayName("Sets and returns valid name of a Product")
-	public void testSetAndGetValidName()
-	{
+	void testSetAndGetValidName() {
 		BaseModel testObject = new BaseModel("piwo", "z pianka");
 		testObject.setName("piwko");
 		assertEquals("piwko", testObject.getName());
