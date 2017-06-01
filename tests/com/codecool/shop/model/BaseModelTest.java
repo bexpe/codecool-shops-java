@@ -39,7 +39,7 @@ class BaseModelTest {
 
 	@Test
 	@DisplayName("Returns valid string description of a BaseModel")
-	void testToStringOfBaseModel () {
+	void testToStringOfMethod () {
 		BaseModel testObject = new BaseModel("piwo", "z pianka");
 		testObject.toString();
 		assertEquals("id:0,name:piwo,description:z pianka,", testObject.toString());
