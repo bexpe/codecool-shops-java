@@ -7,23 +7,34 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import javax.management.InstanceAlreadyExistsException;
-
+import java.sql.SQLException;
 import java.util.NoSuchElementException;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Created by rybeusz on 30.05.17.
  */
 class ApplicationTest {
+    private Application app;
+//
+    @Mock
+    private SQLiteJDBCConnector connector;
+//
     @BeforeEach
     void setUp() {
-        String[] args = {};
+        MockitoAnnotations.initMocks(this);
+        connector = new SQLiteJDBCConnector();
+        connector.setDatabaseFilePath("jdbc:sqlite:src/main/resources/test_database.db");
+        app = new Application(connector);
+    }
+
+    @AfterEach
+    void closeDb() {
         try {
-            Application.run(args);
-        } catch (Exception e) {
+            connector.getConnection().close();
+        } catch (SQLException e) {
         }
     }
 
@@ -38,24 +49,11 @@ class ApplicationTest {
     }
 
     @Test
-    void testApplicationThrowErrorIfAlreadyExist() {
-        String[] args = {};
-        assertThrows(InstanceAlreadyExistsException.class, ()-> {
-            Application.run(args);
-        });
-    }
-
-    @Mock
-    private SQLiteJDBCConnector connector;
-
-    @Test
     void testApplicationThrowErrorIfMissingDatabaseTables() {
         String[] args = {};
-        MockitoAnnotations.initMocks(this);
-        connector = new SQLiteJDBCConnector();
-        connector.setDatabaseFilePath("jdbc:sqlite:src/main/resources/test_database.db");
+        app.getConnector().dropTables();
+
         assertThrows(NoSuchElementException.class, ()-> {
-            Application app = new Application(connector);
             app.run(args);
         });
     }
