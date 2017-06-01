@@ -1,6 +1,8 @@
 package com.codecool.shop.model;
 
 import static org.mockito.Mockito.*;
+
+import com.codecool.shop.model.BaseModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
