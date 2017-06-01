@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
 import java.sql.SQLException;
@@ -16,32 +15,22 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class ProductCategoryDaoSqliteTest {
+class ProductCategoryDaoSqliteTest extends BaseTest{
 
-    private SQLFilesPaths sqlFilesPaths;
     @Spy
     private List<ProductCategory> spiedCategories = new ArrayList<>();
     @Mock
     private ProductCategoryDao productCategoryDao;
-    @Mock
-    private SQLiteJDBCConnector connector;
 
     @BeforeEach
     void setUp() throws SQLException {
-        MockitoAnnotations.initMocks(this);
-        connector = new SQLiteJDBCConnector();
-        connector.setDatabaseFilePath("jdbc:sqlite:tests/resources/test_database.db");
-        connector.setSqlFiles(sqlFilesPaths);
-        connector.connectToDb();
-        connector.dropTables();
-        connector.createTables();
-        connector.fillTables();
+        super.setUpDB();
         productCategoryDao = new ProductCategoryDaoSqlite(connector.getConnection());
     }
 
     @AfterEach
-    void close() throws SQLException {
-        connector.getConnection().close();
+    void tearDown() throws SQLException {
+        super.closeDB();
     }
 
     @Test
