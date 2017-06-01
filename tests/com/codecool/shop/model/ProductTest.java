@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 
 class ProductTest {
 	private Product product;
+	private Product productWithNoId;
 	private ProductCategory productCategory;
 	private Supplier supplier;
 
@@ -18,6 +19,14 @@ class ProductTest {
 		supplier = mock(Supplier.class);
 		product = new Product(
 				1,
+				"name",
+				11.1f,
+				"CUR",
+				"description",
+				productCategory,
+				supplier);
+		
+		productWithNoId = new Product(
 				"name",
 				11.1f,
 				"CUR",
@@ -76,12 +85,21 @@ class ProductTest {
 	void testToString() {
 		when(productCategory.getName()).thenReturn("mock category");
 		when(supplier.getName()).thenReturn("mock supplier");
-		assertEquals("id: 1, " +
+		assertEquals(
+				"id: 1, " +
 						"name: name, " +
 						"defaultPrice: 11.1, " +
 						"defaultCurrency: CUR, " +
 						"productCategory: mock category, " +
 						"supplier: mock supplier",
 				product.toString());
+
+		assertEquals(
+				"id: 0, " +
+				"name: name, " +
+				"defaultPrice: 11.1, " +
+				"defaultCurrency: CUR, " +
+				"productCategory: mock category, " +
+				"supplier: mock supplier", productWithNoId.toString());
 	}
 }
