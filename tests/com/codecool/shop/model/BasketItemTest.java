@@ -33,7 +33,7 @@ class BasketItemTest {
 
 	@Test
 	@DisplayName("Returns valid product object")
-	void testGetSupplierObject() {
+	void testGetProductObject() {
 		assertEquals(product, basketItem.getProduct());
 	}
 
