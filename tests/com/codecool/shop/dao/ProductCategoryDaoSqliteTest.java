@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ProductCategoryDaoSqliteTest {
 
+    private SQLFilesPaths sqlFilesPaths;
     @Spy
     private List<ProductCategory> spiedCategories = new ArrayList<>();
     @Mock
@@ -31,6 +31,7 @@ class ProductCategoryDaoSqliteTest {
         MockitoAnnotations.initMocks(this);
         connector = new SQLiteJDBCConnector();
         connector.setDatabaseFilePath("jdbc:sqlite:tests/resources/test_database.db");
+        connector.setSqlFiles(sqlFilesPaths);
         connector.connectToDb();
         connector.dropTables();
         connector.createTables();
@@ -47,14 +48,13 @@ class ProductCategoryDaoSqliteTest {
     void testFindCategoryById() {
         ProductCategory category = mock(ProductCategory.class);
         when(category.toString()).thenReturn(
-                "id: 1,name: chemia, department: Berlin, " +
-                        "description: niemieckie środki czystości i nie tylko");
+                "id: 1,name: TEST CATEGORY 1, department: DEPARTMENT 1, description: DESCRIPTION 1");
         assertEquals(category.toString(), productCategoryDao.find(1).toString());
     }
 
     @Test
     void testGetAllCategoriesListSize() {
-        Mockito.doReturn(4).when(spiedCategories).size();
+        doReturn(2).when(spiedCategories).size();
         assertEquals(spiedCategories.size(), productCategoryDao.getAll().size());
     }
 
@@ -64,16 +64,15 @@ class ProductCategoryDaoSqliteTest {
         List<ProductCategory> spiedCategories = Mockito.spy(new ArrayList<>());
 
         spiedCategories.add(productCategory);
-        Mockito.verify(spiedCategories).add(productCategory);
+        verify(spiedCategories).add(productCategory);
 
-        Mockito.doReturn(productCategory).when(spiedCategories).get(2);
-        when(spiedCategories.get(2).toString()).thenReturn(
-                "id: 3,name: narzędzia, department: neutralna Szwajcaria, " +
-                        "description: narzędzia sprawne jak szwajcarskie zegarki");
+        doReturn(productCategory).when(spiedCategories).get(1);
+        when(spiedCategories.get(1).toString()).thenReturn(
+                "id: 2,name: TEST CATEGORY 2, department: DEPARTMENT 2, description: DESCRIPTION 2");
 
         assertEquals(
-                spiedCategories.get(2).toString(),
-                productCategoryDao.getAll().get(2).toString()
+                spiedCategories.get(1).toString(),
+                productCategoryDao.getAll().get(1).toString()
         );
     }
 }

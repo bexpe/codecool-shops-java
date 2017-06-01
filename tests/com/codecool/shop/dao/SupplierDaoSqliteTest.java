@@ -14,10 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class SupplierDaoSqliteTest {
+
+    private SQLFilesPaths sqlFilesPaths;
     @Spy
     private List<Supplier> spiedSuppliers = new ArrayList<>();
     @Mock
@@ -30,6 +31,7 @@ class SupplierDaoSqliteTest {
         MockitoAnnotations.initMocks(this);
         connector = new SQLiteJDBCConnector();
         connector.setDatabaseFilePath("jdbc:sqlite:tests/resources/test_database.db");
+        connector.setSqlFiles(sqlFilesPaths);
         connector.connectToDb();
         connector.dropTables();
         connector.createTables();
@@ -44,13 +46,13 @@ class SupplierDaoSqliteTest {
 
     @Test
     void testFindSupplierById() {
-        Supplier supplier = new Supplier(1, "Ariel", "Najczerwieńsza jakość");
+        Supplier supplier = new Supplier(1, "SUPPLIER 1", "DESCRIPTION SUPPLIER 1");
         assertEquals(supplier.getDescription(), supplierDao.find(1).getDescription());
     }
 
     @Test
     void testGetAllSuppliersListSize() {
-        Mockito.doReturn(8).when(spiedSuppliers).size();
+        doReturn(2).when(spiedSuppliers).size();
         assertEquals(spiedSuppliers.size(), supplierDao.getAll().size());
     }
 
@@ -58,12 +60,15 @@ class SupplierDaoSqliteTest {
     void testGetSupplierFromAllSuppliersList() {
         Supplier supplier = mock(Supplier.class);
         List<Supplier> spiedSuppliers = Mockito.spy(new ArrayList<>());
+
         spiedSuppliers.add(supplier);
-        Mockito.verify(spiedSuppliers).add(supplier);
-        Mockito.doReturn(supplier).when(spiedSuppliers).get(6);
-        when(spiedSuppliers.get(6).getDescription()).thenReturn("Twój czas należy do nas");
-        assertEquals(spiedSuppliers.get(6).getDescription(),
-                supplierDao.getAll().get(6).getDescription()
+        verify(spiedSuppliers).add(supplier);
+
+        doReturn(supplier).when(spiedSuppliers).get(1);
+        when(spiedSuppliers.get(1).getDescription()).thenReturn("DESCRIPTION SUPPLIER 2");
+
+        assertEquals(spiedSuppliers.get(1).getDescription(),
+                supplierDao.getAll().get(1).getDescription()
         );
     }
 }
