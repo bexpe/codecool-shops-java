@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class SupplierDaoSqliteTest extends BaseTest {
@@ -31,6 +32,11 @@ class SupplierDaoSqliteTest extends BaseTest {
     @AfterEach
     void tearDown() throws SQLException {
         super.closeDB();
+    }
+
+    @Test
+    void testSupplierDaoSqliteImplementSupplierDao() {
+        assertTrue(SupplierDao.class.isAssignableFrom(supplierDao.getClass()));
     }
 
     @Test
