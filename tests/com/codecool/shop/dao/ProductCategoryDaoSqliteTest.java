@@ -12,8 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ProductCategoryDaoSqliteTest extends BaseTest {
@@ -35,6 +34,11 @@ class ProductCategoryDaoSqliteTest extends BaseTest {
     }
 
     @Test
+    void testProductCategoryDaoSqliteImplementProductCategoryDao() {
+        assertTrue(ProductCategoryDao.class.isAssignableFrom(productCategoryDao.getClass()));
+    }
+
+    @Test
     void testFindCategoryById() {
         ProductCategory category = mock(ProductCategory.class);
         when(category.toString()).thenReturn(
@@ -45,7 +49,8 @@ class ProductCategoryDaoSqliteTest extends BaseTest {
         assertEquals(category.toString(), productCategoryDao.find(1).toString());
     }
 
-    @Test void testFindCategoryWithWrongId() {
+    @Test
+    void testFindCategoryWithWrongId() {
         assertNull(productCategoryDao.find(0));
     }
 
