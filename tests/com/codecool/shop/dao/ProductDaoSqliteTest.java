@@ -64,8 +64,13 @@ class ProductDaoSqliteTest extends BaseTest {
         verify(spiedProducts).add(product);
         doReturn(product).when(spiedProducts).get(3);
         when(spiedProducts.get(3).toString()).thenReturn(
-                "id: 4, name: PRODUCT 4, defaultPrice: 104.000000, defaultCurrency: PLN, " +
-                        "productCategory: TEST CATEGORY 1, supplier: SUPPLIER 1");
+                "id: 4, " +
+                        "name: PRODUCT 4, " +
+                        "defaultPrice: 104.000000, " +
+                        "defaultCurrency: PLN, " +
+                        "productCategory: TEST CATEGORY 1, " +
+                        "supplier: SUPPLIER 1"
+        );
         assertEquals(spiedProducts.get(3).toString(), productDao.getAll().get(3).toString());
     }
 
