@@ -1,5 +1,9 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.model.BasketItem;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,7 +32,7 @@ class BasketItemTest {
 
 	@Test
 	@DisplayName("Returns valid product object")
-	public void testGetSupplierObject() {
+	void testGetSupplierObject() {
 		assertEquals(product, basketItem.getProduct());
 	}
 
@@ -39,4 +43,18 @@ class BasketItemTest {
 		basketItem.setProduct(setNewProduct);
 		assertEquals(setNewProduct, basketItem.getProduct());
 	}
+
+	@Test
+	@DisplayName("Returns valid quantity integer")
+	void testGetQuantityInteger() {
+		assertEquals(11, (int) basketItem.getQuantity());
+	}
+
+	@Test
+	@DisplayName("Returns valid quantity integer")
+	void testSetQuantityInteger() {
+		basketItem.setQuantity(15);
+		assertEquals(11, (int) basketItem.getQuantity());
+	}
+
 }
