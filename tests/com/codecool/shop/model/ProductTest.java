@@ -1,86 +1,106 @@
 package com.codecool.shop.model;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Currency;
-import java.util.Locale;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-/**
- * Created by beata on 29.05.17.
- */
 class ProductTest {
-	public ProductCategory testCategory;
-	public Supplier testSupplier;
-	public Product testProduct;
-	public Currency testCurrency;
+	private Product product;
+	private Product productWithNoId;
+	private ProductCategory productCategory;
+	private Supplier supplier;
 
 	@BeforeEach
 	void setup() {
-		testCategory = new ProductCategory("alkohol", "niskoprocentowy", "monopolowy");
-		testSupplier = new Supplier("Warka", "slaba marka");
-		testProduct = new Product("piwo", 8, "PLN", "z pianka", testCategory, testSupplier);
+		productCategory = mock(ProductCategory.class);
+		supplier = mock(Supplier.class);
+		product = new Product(
+				1,
+				"name",
+				11.1f,
+				"CUR",
+				"description",
+				productCategory,
+				supplier);
+
+		productWithNoId = new Product(
+				"name",
+				11.1f,
+				"CUR",
+				"description",
+				productCategory,
+				supplier);
 	}
 
 	@Test
-	@DisplayName("Sets and returns valid default price of a Product")
-	public void testSetAndGetDefaultPrice()
-	{
-		testProduct.setDefaultPrice(12);
-		assertEquals(12, testProduct.getDefaultPrice());
+	void testGetDefaultPrice() {
+		assertEquals(11.1f, product.getDefaultPrice());
 	}
 
 	@Test
-	@DisplayName("Don't allow to set default price to minus value")
-	public void testSetDefaultPriceToMinus()
-	{
-		assertThrows(IllegalArgumentException.class, ()->
-				testProduct.setPrice(-10, "PLN"));
+	void testGetDefaultCurrency() {
+		assertEquals("CUR", product.getDefaultCurrency());
 	}
 
 	@Test
-	@DisplayName("Sets and returns valid currency of a Product")
-	public void testSetAndGetDefaultCurrency()
-	{
-		testCurrency = Currency.getInstance(Locale.UK);
-		testProduct.setDefaultCurrency(testCurrency);
-		assertEquals(Currency.getInstance(Locale.UK), testProduct.getDefaultCurrency());
+	void testGetPrice() {
+		assertEquals("11.1" + " " + "CUR", product.getPrice());
 	}
 
 	@Test
-	@DisplayName("Sets and returns valid price of a Product as a double type")
-	public void testSetAndGetPriceAsDoubleType()
-	{
-		testCurrency = Currency.getInstance(Locale.UK);
-		testProduct.setPrice(12, "PLN");
-		assertEquals("12.0 PLN", testProduct.getPrice());
+	void testGetProductCategory() {
+		assertEquals(productCategory, product.getProductCategory());
 	}
 
 	@Test
-	@DisplayName("Sets and returns valid product category object")
-	public void testSetAndGetCategoryObject()
-	{
-		testProduct.setProductCategory(testCategory);
-		assertEquals("id: 0,name: alkohol, department: monopolowy, description: niskoprocentowy", testProduct.getProductCategory().toString());
+	void testGetProductCategoryWithNegativePrice () {
+		assertThrows(IllegalArgumentException.class, ()->{
+			product = new Product(
+					1,
+					"name",
+					-11.1f,
+					"CUR",
+					"description",
+					productCategory,
+					supplier);
+		});
 	}
 
 	@Test
-	@DisplayName("Sets and returns valid supplier object")
-	public void testSetAndGetSupplierObject()
-	{
-		testProduct.setSupplier(testSupplier);
-		assertEquals("id: 0, name: Warka, description: slaba marka", testProduct.getSupplier().toString());
+	void testGetSupplier() {
+		assertEquals(supplier, product.getSupplier());
 	}
 
 	@Test
-	@DisplayName("Returns valid string descripting a product")
-	void testToStringOfProduct () {
+	void testSetSupplier() {
+		Supplier setNewSupplier = mock(Supplier.class);
+		product.setSupplier(setNewSupplier);
+		assertEquals(setNewSupplier, product.getSupplier());
+	}
 
-		testProduct.toString();
-		assertEquals("id: 0, name: piwo, defaultPrice: 8.0, defaultCurrency: PLN, productCategory: alkohol, supplier: Warka", testProduct.toString());
+	@Test
+	void testToString() {
+		when(productCategory.getName()).thenReturn("mock category");
+		when(supplier.getName()).thenReturn("mock supplier");
+		assertEquals(
+				"id: 1, " +
+						"name: name, " +
+						"defaultPrice: 11.1, " +
+						"defaultCurrency: CUR, " +
+						"productCategory: mock category, " +
+						"supplier: mock supplier",
+				product.toString());
+
+		assertEquals(
+				"id: 0, " +
+				"name: name, " +
+				"defaultPrice: 11.1, " +
+				"defaultCurrency: CUR, " +
+				"productCategory: mock category, " +
+				"supplier: mock supplier",
+                productWithNoId.toString());
 	}
 }
