@@ -18,6 +18,7 @@ import static org.mockito.Mockito.*;
 
 class ProductCategoryDaoSqliteTest {
 
+    private SQLFilesPaths sqlFilesPaths;
     @Spy
     private List<ProductCategory> spiedCategories = new ArrayList<>();
     @Mock
@@ -30,6 +31,7 @@ class ProductCategoryDaoSqliteTest {
         MockitoAnnotations.initMocks(this);
         connector = new SQLiteJDBCConnector();
         connector.setDatabaseFilePath("jdbc:sqlite:tests/resources/test_database.db");
+        connector.setSqlFiles(sqlFilesPaths);
         connector.connectToDb();
         connector.dropTables();
         connector.createTables();

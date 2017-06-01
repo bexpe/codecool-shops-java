@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class SupplierDaoSqliteTest {
+
+    private SQLFilesPaths sqlFilesPaths;
     @Spy
     private List<Supplier> spiedSuppliers = new ArrayList<>();
     @Mock
@@ -29,6 +31,7 @@ class SupplierDaoSqliteTest {
         MockitoAnnotations.initMocks(this);
         connector = new SQLiteJDBCConnector();
         connector.setDatabaseFilePath("jdbc:sqlite:tests/resources/test_database.db");
+        connector.setSqlFiles(sqlFilesPaths);
         connector.connectToDb();
         connector.dropTables();
         connector.createTables();
