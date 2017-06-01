@@ -46,7 +46,6 @@ class ProductDaoSqliteTest extends BaseTest {
         assertTrue(ProductDao.class.isAssignableFrom(productDao.getClass()));
     }
 
-
     @Test
     void testAddProductToDB() {
         Supplier supplier = mock(Supplier.class);
