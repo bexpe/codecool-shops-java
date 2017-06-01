@@ -29,7 +29,7 @@ class SupplierDaoSqliteTest extends BaseTest{
     }
 
     @AfterEach
-    void close() throws SQLException {
+    void tearDown() throws SQLException {
         super.closeDB();
     }
 
