@@ -36,4 +36,14 @@ class BasketTest {
 
         assertEquals(2, basket.getItems().size() );
     }
+
+    @Test
+    void testAddItemsToBasketListWithSameId() {
+        basket.add(product,3);
+        Product product1 = mock(Product.class);
+        basket.add(product1,1);
+
+        assertEquals(1, basket.getItems().size() );
+        assertEquals(4, basket.getItems().get(0).getQuantity().intValue());
+    }
 }
