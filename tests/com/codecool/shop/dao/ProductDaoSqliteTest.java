@@ -53,4 +53,22 @@ class ProductDaoSqliteTest extends BaseTest {
         doReturn(4).when(spiedProducts).size();
         assertEquals(spiedProducts.size(), productDao.getAll().size());
     }
+
+    @Test
+    void testGetProductFromAllProductList() {
+        Product product = mock(Product.class);
+        spiedProducts = spy(new ArrayList<Product>());
+
+        spiedProducts.add(product);
+        verify(spiedProducts).add(product);
+
+        doReturn(product).when(spiedProducts).get(3);
+        when(spiedProducts.get(3).toString()).thenReturn(
+                "id: 4, name: PRODUCT 4, defaultPrice: 104.000000, defaultCurrency: PLN, " +
+                        "productCategory: TEST CATEGORY 1, supplier: SUPPLIER 1");
+
+        assertEquals(spiedProducts.get(3).toString(), productDao.getAll().get(3).toString());
+
+
+    }
 }
