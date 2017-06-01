@@ -84,7 +84,7 @@ class BasketTest {
     }
 
     @Test
-    void getCurrency() {
+    void testGetCurrency() {
         assertEquals("PLN", basket.getCurrency());
     }
 }
