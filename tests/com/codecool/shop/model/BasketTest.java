@@ -1,10 +1,13 @@
 package com.codecool.shop.model;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by beata on 29.05.17.
@@ -20,5 +23,17 @@ class BasketTest {
         basket = new Basket();
         basketItem = mock(BasketItem.class);
         product = mock(Product.class);
+    }
+
+    @Test
+    void testAddGetItemsToBasketList() {
+        when(product.getId()).thenReturn(1);
+        basket.add(product,3);
+
+        Product product1 = mock(Product.class);
+        when(product.getId()).thenReturn(2);
+        basket.add(product1,1);
+
+        assertEquals(2, basket.getItems().size() );
     }
 }
