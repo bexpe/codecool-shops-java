@@ -14,8 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ProductCategoryDaoSqliteTest {
 
@@ -54,7 +53,7 @@ class ProductCategoryDaoSqliteTest {
 
     @Test
     void testGetAllCategoriesListSize() {
-        Mockito.doReturn(4).when(spiedCategories).size();
+        doReturn(4).when(spiedCategories).size();
         assertEquals(spiedCategories.size(), productCategoryDao.getAll().size());
     }
 
@@ -64,9 +63,9 @@ class ProductCategoryDaoSqliteTest {
         List<ProductCategory> spiedCategories = Mockito.spy(new ArrayList<>());
 
         spiedCategories.add(productCategory);
-        Mockito.verify(spiedCategories).add(productCategory);
+        verify(spiedCategories).add(productCategory);
 
-        Mockito.doReturn(productCategory).when(spiedCategories).get(2);
+        doReturn(productCategory).when(spiedCategories).get(2);
         when(spiedCategories.get(2).toString()).thenReturn(
                 "id: 3,name: narzędzia, department: neutralna Szwajcaria, " +
                         "description: narzędzia sprawne jak szwajcarskie zegarki");
