@@ -25,7 +25,7 @@ class ProductTest {
 				"description",
 				productCategory,
 				supplier);
-		
+
 		productWithNoId = new Product(
 				"name",
 				11.1f,
@@ -100,6 +100,7 @@ class ProductTest {
 				"defaultPrice: 11.1, " +
 				"defaultCurrency: CUR, " +
 				"productCategory: mock category, " +
-				"supplier: mock supplier", productWithNoId.toString());
+				"supplier: mock supplier",
+                productWithNoId.toString());
 	}
 }
