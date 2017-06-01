@@ -3,6 +3,7 @@ package com.codecool.shop.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,5 +46,13 @@ class BasketTest {
 
         assertEquals(1, basket.getItems().size() );
         assertEquals(4, basket.getItems().get(0).getQuantity().intValue());
+    }
+
+    @Test
+    void testSetItems() {
+        basketItemList = new ArrayList<>();
+        basketItemList.add(basketItem);
+        basket.setItems(basketItemList);
+        assertEquals(1, basket.getItems().size());
     }
 }
