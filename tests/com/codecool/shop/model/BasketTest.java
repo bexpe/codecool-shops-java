@@ -55,4 +55,15 @@ class BasketTest {
         basket.setItems(basketItemList);
         assertEquals(1, basket.getItems().size());
     }
+
+    @Test
+    void testGetTotalCount() {
+        when(product.getId()).thenReturn(1);
+        basket.add(product,3);
+
+        Product product1 = mock(Product.class);
+        when(product1.getId()).thenReturn(2);
+        basket.add(product1,1);
+        assertEquals(4, basket.getTotalCount().intValue());
+    }
 }
