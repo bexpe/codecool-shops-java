@@ -87,9 +87,7 @@ class ProductDaoSqliteTest extends BaseTest {
 
     @Test
     void testGetProductByName() {
-        Product product = mock(Product.class);
-        when(product.getName()).thenReturn("PRODUCT 4");
         when(spiedProducts.size()).thenReturn(1);
-        assertEquals(1, productDao.getBy(product.getName()).size());
+        assertEquals(spiedProducts.size(), productDao.getBy("PRODUCT 4").size());
     }
 }
