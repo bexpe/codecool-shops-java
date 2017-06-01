@@ -60,15 +60,12 @@ class ProductDaoSqliteTest extends BaseTest {
     void testGetProductFromAllProductList() {
         Product product = mock(Product.class);
         spiedProducts = spy(new ArrayList<Product>());
-
         spiedProducts.add(product);
         verify(spiedProducts).add(product);
-
         doReturn(product).when(spiedProducts).get(3);
         when(spiedProducts.get(3).toString()).thenReturn(
                 "id: 4, name: PRODUCT 4, defaultPrice: 104.000000, defaultCurrency: PLN, " +
                         "productCategory: TEST CATEGORY 1, supplier: SUPPLIER 1");
-
         assertEquals(spiedProducts.get(3).toString(), productDao.getAll().get(3).toString());
     }
 
@@ -88,5 +85,11 @@ class ProductDaoSqliteTest extends BaseTest {
         assertEquals(spiedProducts.size(), productDao.getBy(mockedCategory).size());
     }
 
-
+    @Test
+    void testGetProductByName() {
+        Product product = mock(Product.class);
+        when(product.getName()).thenReturn("PRODUCT 4");
+        when(spiedProducts.size()).thenReturn(1);
+        assertEquals(1, productDao.getBy(product.getName()).size());
+    }
 }
