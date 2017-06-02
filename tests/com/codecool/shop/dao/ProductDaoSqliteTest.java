@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 class ProductDaoSqliteTest extends BaseTest {
@@ -38,6 +39,11 @@ class ProductDaoSqliteTest extends BaseTest {
     @AfterEach
     void tearDown() throws SQLException {
         super.closeDB();
+    }
+
+    @Test
+    void testProductDaoSqliteImplementProductDao() {
+        assertTrue(ProductDao.class.isAssignableFrom(productDao.getClass()));
     }
 
     @Test
@@ -109,9 +115,7 @@ class ProductDaoSqliteTest extends BaseTest {
 
     @Test
     void testGetProductByName() {
-        Product product = mock(Product.class);
-        when(product.getName()).thenReturn("PRODUCT 4");
         when(spiedProducts.size()).thenReturn(1);
-        assertEquals(1, productDao.getBy(product.getName()).size());
+        assertEquals(spiedProducts.size(), productDao.getBy("PRODUCT 4").size());
     }
 }

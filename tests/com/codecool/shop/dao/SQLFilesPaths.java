@@ -1,6 +1,6 @@
 package com.codecool.shop.dao;
 
-public enum SQLFilesPaths {
+enum SQLFilesPaths {
     PRODUCTS_DATA("tests/resources/sql/productsData.sql"),
     PRODUCTS("tests/resources/sql/products.sql"),
     CATEGORIES_DATA("tests/resources/sql/categoriesData.sql"),
