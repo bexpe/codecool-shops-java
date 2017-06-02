@@ -1,8 +1,4 @@
 # Codecool Online Shop
 
-Java SE: 2nd TW week, Project skeleton
-
-# Install
-
-Import this project to IntelliJ as a Maven project.
-IntelliJ can auto-install the dependencies from the pom.xml
+Description
+https://docs.google.com/document/d/1NL4YugcO_tilHnOPQo5RznEccDqUHJ-BD5QtmOJHn5Y/edit
