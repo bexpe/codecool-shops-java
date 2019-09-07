@@ -27,6 +27,8 @@ public class BasketItem extends BaseModel {
     }
 
     public float getValue() {
-        return Math.round(this.quantity * this.getProduct().getDefaultPrice() * 100) / 100F;
+        return Math.round(this.quantity *
+                this.getProduct().getDefaultPrice()
+                * 100) / 100F;
     }
 }
